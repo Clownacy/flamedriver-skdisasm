@@ -4,7 +4,6 @@
 #include <iostream>
 #include <limits>
 #include <sstream>
-#include <unistd.h>    // for unlink
 
 #include "bigendian_io.h"
 #include "kosinski.h"
@@ -32,7 +31,7 @@ int main(int argc, char* argv[]) {
     for (int ii = 1; ii < argc; ii++) {
         const char* arg = argv[ii];
 
-        if ((strcasecmp(arg, "-h") == 0) || (strcasecmp(arg, "--help") == 0)) {
+        if ((strcmp(arg, "-h") == 0) || (strcmp(arg, "--help") == 0)) {
             printUsage(argv[0]);
             return 1;
         }
@@ -59,7 +58,7 @@ int main(int argc, char* argv[]) {
                     std::cout << "done";
                 } else {
                     // Error; delete the rom because it's probably hosed
-                    unlink(romFileName);
+                    remove(romFileName);
                 }
             } else {
                 std::cout << std::endl;
